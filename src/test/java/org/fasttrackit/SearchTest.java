@@ -24,6 +24,8 @@ public class SearchTest {
         String keyWord = "vase";
         driver.findElement(By.id("search")).
                 sendKeys(keyWord);
+        System.out.println("Pressed enter in search field."); // log example
+
 
         driver.findElement(By.tagName("button")).click();
 
