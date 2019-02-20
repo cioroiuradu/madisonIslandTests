@@ -1,11 +1,14 @@
 package org.fasttrackit;
 
+import org.fasttrackit.pageobjects.Header;
+import org.fasttrackit.pageobjects.ProductsGrid;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
@@ -21,20 +24,15 @@ public class SearchTest {
         WebDriver driver = new ChromeDriver();
         driver.get(AppConfig.getSiteUrl());
 
+        Header header = PageFactory.initElements(driver, Header.class);
+
         String keyWord = "vase";
-        driver.findElement(By.id("search")).
-                sendKeys(keyWord);
-        System.out.println("Pressed enter in search field."); // log example
+        header.search(keyWord);
 
 
-        driver.findElement(By.tagName("button")).click();
+        ProductsGrid productsGrid = PageFactory.initElements(driver, ProductsGrid.class);
 
-//        driver.findElement(By.linkText("WOMEN")).click();
-
-        List<WebElement> productNameContainers =
-                driver.findElements(By.cssSelector(".product-name > a"));
-
-        for(WebElement container : productNameContainers) {
+        for(WebElement container : productsGrid.getProductNameContainers()) {
             String productName = container.getText();
 
             assertThat("Some of the produc names do not contain the searched keyword",
