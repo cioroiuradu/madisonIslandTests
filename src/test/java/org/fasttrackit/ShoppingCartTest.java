@@ -12,13 +12,10 @@ import org.openqa.selenium.support.PageFactory;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ShoppingCartTest {
+public class ShoppingCartTest extends TestBase {
 
     @Test
     public void addToCartFromSearchResultsTest() {
-        System.setProperty("webdriver.chrome.driver", AppConfig.getChromeDriverPath());
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://fasttrackit.org/selenium-test/");
 
         String keyWord = "vase";
         Header header = PageFactory.initElements(driver, Header.class);
